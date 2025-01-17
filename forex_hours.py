@@ -53,8 +53,12 @@ def display_forex_market_sessions():
                 close_minute = int((info["close"] - close_hour) * 60)
             else:
                 close_minute = 0
-            open_time_utc = datetime.now().replace(hour=open_hour, minute=open_minute, second=0, microsecond=0)
-            close_time_utc = datetime.now().replace(hour=close_hour, minute=close_minute, second=0, microsecond=0)
+            open_time_utc = datetime.now(pytz.utc).replace(hour=open_hour, minute=open_minute, second=0, microsecond=0)
+            close_time_utc = datetime.now(pytz.utc).replace(hour=close_hour, minute=close_minute, second=0, microsecond=0)
+            
+            # Adjust close time to the next day if it crosses midnight
+            if info["close"] < info["open"]:
+                close_time_utc += timedelta(days=1)
             
             open_time_market = open_time_utc.replace(tzinfo=pytz.utc).astimezone(market_timezone)
             close_time_market = close_time_utc.replace(tzinfo=pytz.utc).astimezone(market_timezone)
