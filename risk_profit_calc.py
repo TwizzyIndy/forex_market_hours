@@ -96,7 +96,7 @@ def get_float_input(prompt, min_value=0.0, max_value=None):
 
 
 def main():
-    print("--- Forex Risk & Profit Calculator ---\n")
+    print("--- Risk & Profit Calculator ---\n")
     print("1. Calculate risk and profit based on your capital")
     print("2. Calculate required capital for your profit target")
     choice = input("Choose an option (1 or 2): ").strip()
